@@ -14,6 +14,7 @@ def crawl_finance(stock_id):
     fine_stockdata = pd.read_csv("stockfile.csv", index_col = "Date", parse_dates = ["Date"])
 
 def draw_figure(begin_year,last_year):
+    import pandas as pd
     yearlist = []
     for i in range( int(last_year) - int(begin_year) + 1 ):
         yearlist.append(str(int(begin_year)+i))
@@ -21,18 +22,28 @@ def draw_figure(begin_year,last_year):
     import csv
     list_ = []
     with open("stockfile.csv", "r") as f:
+        tite = f.readline()
         a = csv.reader( f )
         for aline in a:
             if aline[0][:4] in yearlist:
                 list_.append( aline )
 
     with open("chose_period.csv","w") as c:
+        c.write(tite)
         for element in list_:
-            c.writelines(element)
+            for i in range(len(element)):
+                if i == len(element) - 1:
+                    c.write(element[i])
+                else:
+                    c.write(element[i]+",")     
             c.write("\n")
+
+    with open("chose_period.csv","r") as d:
+        e = pd.read_csv("chose_period.csv", index_col = "Date", parse_dates = ["Date"])
         import matplotlib.pyplot as plt
-        c.Close.plot()
+        e.Close.plot()
         plt.show()
+        
 
 
 stock_id = input()
