@@ -2,7 +2,7 @@ def crawl_finance(stock_id):
 	import requests
 	import datetime
 	now = int(datetime.datetime.now().timestamp())+86400
-	url = "https://query1.finance.yahoo.com/v7/finance/download/" + stock_id + "?period1=0&period2=" + str(now) + "&interval=1d&events=history&crumb=hP2rOschxO0"
+	url = "https://query1.finance.yahoo.com/v7/finance/download/" + stock_id + ".TW?period1=0&period2=" + str(now) + "&interval=1d&events=history&crumb=hP2rOschxO0"
 	response = requests.post(url)
 
 	with open("C:\\Users\\anan2\\Desktop\\stockfile.csv", "w") as f:
@@ -67,10 +67,8 @@ def draw_figure(begin_year,last_year):
 	data = [trace]	#Can draw more than one data series
 	py.plot(data, filename='scatter-mode')	  
 
-#stock_id = input()
-stock_id = '2002'
-#wanted_period = input()
-wanted_period = '2000,2018'
+stock_id = input()
+wanted_period = input()
 begin_year = wanted_period.split(",")[0]
 last_year = wanted_period.split(",")[1]
 crawl_finance(stock_id)
