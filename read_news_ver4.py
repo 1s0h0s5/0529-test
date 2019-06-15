@@ -345,4 +345,3 @@ read = ReadtheNews()
 read.master.title("我要看新聞")
 read.mainloop()
 
-
