@@ -352,7 +352,6 @@ class ReadTheNews(tk.Frame):
 
 
 
-
 #程式開始
 
 all_news = []
@@ -360,26 +359,7 @@ read = ReadTheNews()
 read.master.title("股價新聞小幫手")
 read.mainloop()
 
-stockid = input('')
-time_start = input('').split('/') #ex:2018/3/27
-time_end = input('').split('/')
-all_news = generate_news(stockid, time_start[0], time_start[1], time_start[2], time_end[0], time_end[1], time_end[2])
-
-
 
 """
-for news in all_news:
-    print("第"+str(news.number)+"篇")
-    print("連結: ", news.link)
-    print("標題: ", news.title)
-    print("內文: \n", news.content.strip(), "\n")
-
-    if news.number == 10:
-        break
-
-
 台積電2330，鴻海2317，聯發科2454，中華電信2412，統一1216，大立光3008
 """
-
-
-
