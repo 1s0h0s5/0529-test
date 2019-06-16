@@ -55,8 +55,8 @@ class ReadTheNews(tk.Frame):
         f1 = tkFont.Font(size = 12, family = "Courier New")
         f2 = tkFont.Font(size = 16, family = "Berlin Sans FB Demi")
         
-        self.head = tk.Label(self, text = "股價新聞小幫手", height = 2, width = 20, font = f2)
-        #執行完的text會變成 "共搜尋到" + count + "篇相關新聞"
+        #使用者輸入變數
+        self.head = tk.Label(self, text = "股價新聞小幫手", height = 2, width = 20, font = f2) #執行完的text會變成 "共搜尋到" + count + "篇相關新聞"
         self.askforid = tk.Label(self, text = "請輸入股價代碼:", height = 1, width = 15, font = f1)
         self.idInput = tk.Text(self, height = 1, width = 5, font = f1)
 
@@ -74,37 +74,26 @@ class ReadTheNews(tk.Frame):
         self.run.grid(row = 1, column = 5, sticky = tk.NW)
 
 
-        #製作下拉式表單，選擇第__篇~第__篇新聞
+        #製作下拉式表單，選擇第__筆~第__筆新聞
         lst1 = ['第1~5筆', '第6~10筆', '第11~15筆', '第16~20筆', '第21~25筆', '第26~30筆']
         var1 = tk.StringVar()
         self.list = tk.OptionMenu(self, var1, *lst1)
         self.list.config(height=1, width=10, font=f1)
-        
         self.btnconfir = tk.Button(self, text = '確認', height=1, width=5, command = self.shownewstitle, font = f1)
-        
-        #self.choosenews= tk.Label(self, text = '選擇新聞' ,height=2, width=10, font=f1)
 
+        
+        #右邊的標題列&選擇要讀哪一篇
         self.shownews_1= tk.Label(self, relief="solid", justify="left",height=2, width=60, font=f1)
         self.shownews_2= tk.Label(self, relief="solid", justify="left",height=2, width=60, font=f1)
         self.shownews_3= tk.Label(self, relief="solid", justify="left",height=2, width=60, font=f1)
         self.shownews_4= tk.Label(self, relief="solid", justify="left",height=2, width=60, font=f1)
         self.shownews_5= tk.Label(self, relief="solid", justify="left",height=2, width=60, font=f1)
-        # self.shownews_6= tk.Label(self, relief="solid", justify="left",height=2, width=60, font=f1)
-        # self.shownews_7= tk.Label(self, relief="solid", justify="left",height=2, width=60, font=f1)
-        # self.shownews_8= tk.Label(self, relief="solid", justify="left",height=2, width=60, font=f1)
-        # self.shownews_9= tk.Label(self, relief="solid", justify="left",height=2, width=60, font=f1)
-        # self.shownews_10= tk.Label(self, relief="solid", justify="left",height=2, width=60, font=f1)
 
         self.btn1 = tk.Button(self, text = '點選', height=1, width=5, command = self.clickBtnNews1, font = f1)
         self.btn2 = tk.Button(self, text = '點選', height=1, width=5, command = self.clickBtnNews2, font = f1)
         self.btn3 = tk.Button(self, text = '點選', height=1, width=5, command = self.clickBtnNews3, font = f1)
         self.btn4 = tk.Button(self, text = '點選', height=1, width=5, command = self.clickBtnNews4, font = f1)
         self.btn5 = tk.Button(self, text = '點選', height=1, width=5, command = self.clickBtnNews5, font = f1)
-        # self.btn6 = tk.Button(self, text = '點選', height=1, width=5, command = self.clickBtnNews6, font = f1)
-        # self.btn7 = tk.Button(self, text = '點選', height=1, width=5, command = self.clickBtnNews7, font = f1)
-        # self.btn8 = tk.Button(self, text = '點選', height=1, width=5, command = self.clickBtnNews8, font = f1)
-        # self.btn9 = tk.Button(self, text = '點選', height=1, width=5, command = self.clickBtnNews9, font = f1)
-        # self.btn10 = tk.Button(self, text = '點選', height=1, width=5, command = self.clickBtnNews10, font = f1)
 
 
         self.btnconfir.grid(row = 2, column = 4, sticky = tk.NW)
@@ -115,30 +104,21 @@ class ReadTheNews(tk.Frame):
         self.shownews_3.grid(row = 5, column = 3, columnspan = 2, sticky = tk.NE)
         self.shownews_4.grid(row = 6, column = 3, columnspan = 2, sticky = tk.NE)
         self.shownews_5.grid(row = 7, column = 3, columnspan = 2, sticky = tk.NE)
-        # self.shownews_6.grid(row = 8, column = 3, columnspan = 2, sticky = tk.NE)
-        # self.shownews_7.grid(row = 9, column = 3, columnspan = 2, sticky = tk.NE)
-        # self.shownews_8.grid(row = 10, column = 3, columnspan = 2, sticky = tk.NE)
-        # self.shownews_9.grid(row = 11, column = 3, columnspan = 2, sticky = tk.NE)
-        # self.shownews_10.grid(row = 12, column = 3, columnspan = 2, sticky = tk.NE)
 
         self.btn1.grid(row = 3, column = 5, sticky = tk.NW)
         self.btn2.grid(row = 4, column = 5, sticky = tk.NW)
         self.btn3.grid(row = 5, column = 5, sticky = tk.NW)
         self.btn4.grid(row = 6, column = 5, sticky = tk.NW)
         self.btn5.grid(row = 7, column = 5, sticky = tk.NW)
-        # self.btn6.grid(row = 8, column = 5, sticky = tk.NW)
-        # self.btn7.grid(row = 9, column = 5, sticky = tk.NW)
-        # self.btn8.grid(row = 10, column = 5, sticky = tk.NW)
-        # self.btn9.grid(row = 11, column = 5, sticky = tk.NW)
-        # self.btn10.grid(row = 12, column = 5, sticky = tk.NW)
 
-        #self.show = tk.Label(self, relief="solid", borderwidth=0.5, wraplength="1350" ,justify="left",height=17, width=140, font=f1)
+
+        #在最底下顯示全文內容
         self.show = tk.Message(self, text="", anchor=tk.NW, justify="left", width=1200, padx=3, pady=2, font=f1)
         self.show.grid(row = 13, column = 0, columnspan = 6, sticky = tk.NW)
 
 
 
-    #執行!
+    ### {[執行!!]}
     def run(self):
         stockid = self.idInput.get("1.0", 'end-1c')
         time_start = self.startInput.get("1.0", 'end-1c').split('/') #ex:2018/3/27
@@ -239,45 +219,35 @@ class ReadTheNews(tk.Frame):
             self.shownews_3["text"] = all_news[3].title[:30] + '...'
             self.shownews_4["text"] = all_news[4].title[:30] + '...'
             self.shownews_5["text"] = all_news[5].title[:30] + '...'
-            # self.shownews_6["text"] = all_news[6].title[:30] + '...'
-            # self.shownews_7["text"] = all_news[7].title[:30] + '...'
-            # self.shownews_8["text"] = all_news[8].title[:30] + '...'
-            # self.shownews_9["text"] = all_news[9].title[:30] + '...'
-            # self.shownews_10["text"] = all_news[10].title[:30] + '...'
+
         elif choose == '第6~10筆':
             self.shownews_1["text"] = all_news[6].title[:30] + '...'
             self.shownews_2["text"] = all_news[7].title[:30] + '...'
             self.shownews_3["text"] = all_news[8].title[:30] + '...'
             self.shownews_4["text"] = all_news[9].title[:30] + '...'
             self.shownews_5["text"] = all_news[10].title[:30] + '...'
-            # self.shownews_6["text"] = all_news[16].title[:30] + '...'
-            # self.shownews_7["text"] = all_news[17].title[:30] + '...'
-            # self.shownews_8["text"] = all_news[18].title[:30] + '...'
-            # self.shownews_9["text"] = all_news[19].title[:30] + '...'
-            # self.shownews_10["text"] = all_news[20].title[:30] + '...'
+
         elif choose == '第11~15筆':
             self.shownews_1["text"] = all_news[11].title[:30] + '...'
             self.shownews_2["text"] = all_news[12].title[:30] + '...'
             self.shownews_3["text"] = all_news[13].title[:30] + '...'
             self.shownews_4["text"] = all_news[14].title[:30] + '...'
             self.shownews_5["text"] = all_news[15].title[:30] + '...'
-            # self.shownews_6["text"] = all_news[26].title[:30] + '...'
-            # self.shownews_7["text"] = all_news[27].title[:30] + '...'
-            # self.shownews_8["text"] = all_news[28].title[:30] + '...'
-            # self.shownews_9["text"] = all_news[29].title[:30] + '...'
-            # self.shownews_10["text"] = all_news[30].title[:30] + '...'
+
         elif choose == '第16~20筆':
             self.shownews_1["text"] = all_news[16].title[:30] + '...'
             self.shownews_2["text"] = all_news[17].title[:30] + '...'
             self.shownews_3["text"] = all_news[18].title[:30] + '...'
             self.shownews_4["text"] = all_news[19].title[:30] + '...'
             self.shownews_5["text"] = all_news[20].title[:30] + '...'
+
         elif choose == '第21~25筆':
             self.shownews_1["text"] = all_news[21].title[:30] + '...'
             self.shownews_2["text"] = all_news[22].title[:30] + '...'
             self.shownews_3["text"] = all_news[23].title[:30] + '...'
             self.shownews_4["text"] = all_news[24].title[:30] + '...'
             self.shownews_5["text"] = all_news[25].title[:30] + '...'
+
         elif choose == '第26~30筆':
             self.shownews_1["text"] = all_news[26].title[:30] + '...'
             self.shownews_2["text"] = all_news[27].title[:30] + '...'
@@ -285,7 +255,7 @@ class ReadTheNews(tk.Frame):
             self.shownews_4["text"] = all_news[29].title[:30] + '...'
             self.shownews_5["text"] = all_news[30].title[:30] + '...'
 
-            
+    #跑出全部文章內容
     def printNews(self, theNews):
         article = "新聞標題: " + theNews.title + "\n"
         #article = "發佈時間: " + theNews.time + "\n" #目前還是沒有抓到正確的時間，全部都會跑出'See published time from url'
@@ -368,47 +338,6 @@ class ReadTheNews(tk.Frame):
         elif choose == '第26~30筆':
             self.printNews(all_news[30])
 
-    def clickBtnNews6(self):
-        choose = self.list.cget('text')
-        if choose == '前10筆':
-            self.printNews(all_news[6])
-        elif choose == '第11~20筆':
-            self.printNews(all_news[16])
-        elif choose == '第21~30筆':
-            self.printNews(all_news[26])
-    def clickBtnNews7(self):
-        choose = self.list.cget('text')
-        if choose == '前10筆':
-            self.printNews(all_news[7])
-        elif choose == '第11~20筆':
-            self.printNews(all_news[17])
-        elif choose == '第21~30筆':
-            self.printNews(all_news[27])
-    def clickBtnNews8(self):
-        choose = self.list.cget('text')
-        if choose == '前10筆':
-            self.printNews(all_news[8])
-        elif choose == '第11~20筆':
-            self.printNews(all_news[18])
-        elif choose == '第21~30筆':
-            self.printNews(all_news[28])
-    def clickBtnNews9(self):
-        choose = self.list.cget('text')
-        if choose == '前10筆':
-            self.printNews(all_news[9])
-        elif choose == '第11~20筆':
-            self.printNews(all_news[19])
-        elif choose == '第21~30筆':
-            self.printNews(all_news[29])
-    def clickBtnNews10(self):
-        choose = self.list.cget('text')
-        if choose == '前10筆':
-            self.printNews(all_news[10])
-        elif choose == '第11~20筆':
-            self.printNews(all_news[20])
-        elif choose == '第21~30筆':
-            self.printNews(all_news[30])
-
 
 
 
@@ -419,22 +348,3 @@ all_news = []
 read = ReadTheNews()
 read.master.title("股價新聞小幫手")
 read.mainloop()
-
-
-
-"""
-for news in all_news:
-    print("第"+str(news.number)+"篇")
-    print("連結: ", news.link)
-    print("標題: ", news.title)
-    print("內文: \n", news.content.strip(), "\n")
-
-    if news.number == 10:
-        break
-
-
-台積電2330，鴻海2317，聯發科2454，中華電信2412，統一1216，大立光3008
-"""
-
-
-
