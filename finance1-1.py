@@ -6,6 +6,12 @@ import csv
 import numpy as np
 import os, sys
 from PIL import Image, ImageTk
+from numpy import arange, sin, pi
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg,NavigationToolbar2Tk
+from matplotlib.backend_bases import key_press_handler
+from matplotlib.figure import Figure
+import matplotlib
+import tkinter as Tk
 
 def crawl_finance(stockid):
     now = int(datetime.datetime.now().timestamp())+86400
@@ -54,17 +60,43 @@ def draw_figure(time_start,time_end):
             
     #按照輸股票代碼與時間區段製作股價趨勢圖
     with open("chose_period.csv","r") as d:
-        e = pd.read_csv("chose_period.csv", index_col = "Date", parse_dates = ["Date"])
-        plt.xlabel('Date')
-        plt.ylabel('Stock Price')
-        e.Close.plot()
-        plt.show()
-        stock_time_price = 'stock.png'
-        if os.path.isfile(stock_time_price):
-            os.remove(stock_time_price)
-            plt.savefig(stock_time_price)
-        else:
-            plt.savefig(stock_time_price)
+        import pandas as pd
+        matplotlib.use('TkAgg')
+        root =Tk.Tk()
+        root.title("matplotlib in TK")
+        #設定圖形的尺寸大小
+        f =Figure(figsize=(5,4), dpi=100)
+        a = f.add_subplot(111)
+        #繪製圖形
+        file = 'chose_period.csv'
+        pd = pd.read_csv(file)
+        y_values = pd['Close']
+        x_values = pd['Date']
+        x_list=[]
+        y_list=[]
+        for j in y_values :
+            y_list.append(j)
+        for i in x_values :
+            x_list.append(i)
+        tick_spacing = 1000000
+        a.plot(x_list, y_list)
+
+        #將繪製成功的股價圖import到tk窗口上
+        canvas =FigureCanvasTkAgg(f, master=root)
+        canvas.draw()
+        canvas.get_tk_widget().pack(side=Tk.TOP, fill=Tk.BOTH, expand=1)
+        #定義並綁定鍵盤事件處理函數
+        def on_key_event(event):
+            print('you pressed %s'% event.key)
+            key_press_handler(event, canvas, toolbar)
+            canvas.mpl_connect('key_press_event', on_key_event)
+        #建立結束按鈕
+        def _quit():
+            root.quit()
+            root.destroy()
+        button =Tk.Button(master=root, text='Quit', command=_quit)
+        button.pack(side=Tk.BOTTOM)
+        Tk.mainloop()
 
 stockid = input('')
 
